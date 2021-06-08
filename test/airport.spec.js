@@ -9,7 +9,7 @@ const experimentalPlane = require('../Planes/experimentalPlane');
 const ExperimentalTypes = require('../models/experimentalTypes');
 const ClassificationLevel = require('../models/classificationLevel');
 
-describe('My Test', () => {
+describe('Tests for getting planes', () => {
 
     let planes = [
         new PassengerPlane('Boeing-737', 900, 12000, 60500, 164),
@@ -27,22 +27,21 @@ describe('My Test', () => {
         new MilitaryPlane('F-22', 1550, 13000, 11000, MilitaryType.FIGHTER),
         new MilitaryPlane('C-130 Hercules', 650, 5000, 110000, MilitaryType.TRANSPORT),
         new experimentalPlane("Bell X-14", 277, 482, 500, ExperimentalTypes.HIGH_ALTITUDE, ClassificationLevel.SECRET),
-        new experimentalPlane("Ryan X-13 Vertijet", 560, 307, 500, ExperimentalTypes.VTOL, ClassificationLevel.TOP_SECRET)
+        new experimentalPlane("Ryan X-13 Vertijet", 560, 307, 500, ExperimentalTypes.VTOL, ClassificationLevel.TOPSECRET)
     ];
     let planeWithMaxPassengerCapacity = new PassengerPlane('Boeing-747', 980, 16100, 70500, 242);
 
     it('should have military Planes with transport type', () => {
         let airport = new Airport(planes);
         let transportMilitaryPlanes = airport.getTransportMilitaryPlanes();
-        console.log(transportMilitaryPlanes);
-        let flag = false;
-        for (let militaryPlane of transportMilitaryPlanes) {
-            if (militaryPlane.getMilitaryType() === MilitaryType.TYPE_TRANSPORT) {
-                flag = true;
+            let hasMilitaryTransportPlane = false;
+            for (let militaryPlane of transportMilitaryPlanes) {
+            if (militaryPlane.getMilitaryType() === MilitaryType.TRANSPORT) {
+                hasMilitaryTransportPlane = true;
                 break;
             }
         }
-        assert.equal(flag,true);
+        assert.equal(hasMilitaryTransportPlane,true);
     });
 
     it('should check passenger plane with max capacity', () => {
@@ -71,10 +70,10 @@ describe('My Test', () => {
     it('should has at least one bomber plane in military planes', () => {
         let airport = new Airport(planes);
         let bomberMilitaryPlanes  = airport.getBomberMilitaryPlanes ();
-        let flag = false;
+        let atLeastOneBomber = false;
         for (let militaryPlane of bomberMilitaryPlanes) {
             if (militaryPlane.getMilitaryType() === MilitaryType.BOMBER) {
-                flag = true;
+                atLeastOneBomber = true;
             }
             else{
                 assert.fail("Test failed!");
