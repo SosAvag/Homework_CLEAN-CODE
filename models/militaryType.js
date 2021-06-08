@@ -1,8 +1,7 @@
 const MilitaryType = {
-    fighter : 'Fighter',
-    bomber : 'Bomber',
-    transport : 'Transport',
-    TYPE_TRANSPORT : "TYPE-TRANSPORT"
+    FIGHTER : 'Fighter',
+    BOMBER : 'Bomber',
+    TRANSPORT : 'Transport'
 };
 
 module.exports = MilitaryType;

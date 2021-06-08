@@ -20,8 +20,7 @@ class Plane {
     }
 
     getMinLoadCapacity() {
-     let result = this.maxLoadCapacity;
-     return result;
+        return this.maxLoadCapacity;
     }
 }
 
